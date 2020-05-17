@@ -10,6 +10,8 @@ namespace ExamPrototype
 {
     public partial class Exam : System.Web.UI.Page
     {
+        // This is sample check in for demo.. can be removed it later..
+
         const int questionCountForExam = 10;
         protected void Page_Load(object sender, EventArgs e)
         {

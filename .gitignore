@@ -5,3 +5,6 @@
 /Exam/obj/Debug
 /Exam/bin
 /packages
+/.vs/VSWorkspaceState.json
+/.vs/ProjectSkeleton-Git/v16
+/.vs/ExamPrototype/v16/Server/sqlite3
