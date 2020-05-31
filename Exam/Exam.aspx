@@ -22,7 +22,6 @@
         .qbox {
             box-shadow:1px 1px 10px;
             width:70vw;
-
             float:left;
             height:auto;
         }
@@ -94,9 +93,6 @@
   
         }
 
-
-
-
         @media (max-width:1400px) {
             .qbox {
                 margin-left:13vw;
@@ -115,7 +111,7 @@
          <center>
             <b style="font-size:xx-large">Welcome To Online Test</b>
         </center>
-   
+   Git
     <div class="topnav">
   <a href="#home" class="active">Logo</a>
   <div id="myLinks">
