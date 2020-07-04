@@ -16,10 +16,10 @@ namespace ExamPrototype.DAL
     public class ExamDAL
     {
 
-        public List<QueAnsVO> GetQuestions()
+        public List<QueAnsVO> GetQuestionsForExam(long examId)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("Select * from QuetionsAndAnswers");
+            SqlCommand cmd = new SqlCommand($"Select * from QuetionsAndAnswers inner join ExamsAndQuestionsMapper on QuetionsAndAnswers.QueID = ExamsAndQuestionsMapper.QueID where ExamID = {examId}");
             cmd.Connection = con;
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = cmd;

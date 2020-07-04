@@ -11,25 +11,28 @@ using System.Configuration;
 using System.Drawing;
 using System.Web.WebSockets;
 using ExamPrototype.DAL;
+using System.Text;
 
 namespace ExamPrototype
 {
     public partial class Exam : System.Web.UI.Page
     {
+        
         static int currentposition = 0;
         static int totalrows = 0;
         const int questionCountForExam = 10;
-
+        long examId = 3;
+        int studentid = 12;
+        
+        int iscompleted = 1;
         protected void lbt_Click(object sender, EventArgs e)
         {
             pvo.Style.Add("visibility", "visible");
-            Response.Write("clicked");
-
         }
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+          
             if (La.Text == "00:00:00")
             {              
                 //This will call FinishExam
@@ -49,7 +52,7 @@ namespace ExamPrototype
 
                 // ExamID will come from queryString
                 // long examId = Request.QueryString["ExamID"];
-                long examId = 1;
+               
                 List<QueAnsVO> examQuestions = GetExamQuestions(examId);
 
             }
@@ -57,7 +60,7 @@ namespace ExamPrototype
         }
         private void BindQuestionsAndAnswers()
         {
-            List<QueAnsVO> queAnsVOList = GetExamQuestions(1);
+            List<QueAnsVO> queAnsVOList = GetExamQuestions(examId);
 
             PagedDataSource pg = new PagedDataSource();
             pg.DataSource = queAnsVOList;
@@ -72,8 +75,13 @@ namespace ExamPrototype
             QuestionsAndAnswersDataList.DataBind();
 
             // This is to display buttons
+
+           
             QueNoPanelDataList.DataSource = queAnsVOList;
             QueNoPanelDataList.DataBind();
+          
+            
+          
         }
         
 
@@ -81,7 +89,7 @@ namespace ExamPrototype
         {
             //return MockQuestions.GetQuestions(questionCountForExam, examId);
             ExamDAL examDAL = new ExamDAL();
-            List<QueAnsVO> queAnsVOList = examDAL.GetQuestions();
+            List<QueAnsVO> queAnsVOList = examDAL.GetQuestionsForExam(examId);
             return queAnsVOList;
         }
 
@@ -134,28 +142,10 @@ namespace ExamPrototype
 
         }
       
-
-
         void insert(string value, string qid)
         {
-            SqlConnection cc = new SqlConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString);
-            cc.Open();
-            SqlCommand cm = new SqlCommand("SELECT COUNT(*) FROM result where qno=@qno",cc);
-            cm.Parameters.AddWithValue(@"qno", qid);
-            string op = cm.ExecuteScalar().ToString();
-            if(op=="1")
-            {
-                Response.Write("<script>alert('Exist')</script>");
-            }
-            else
-            { 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CS"].ConnectionString);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("insert into result(ans,qno)values(@ans,@qno)", conn);
-            cmd.Parameters.AddWithValue(@"ans", value.ToString());
-            cmd.Parameters.AddWithValue(@"qno", qid.ToString());
-            cmd.ExecuteNonQuery();
-            }
+            Response.Write("Write");
+            
         }
         protected void QuestionsAndAnswersDataList_ItemCommand(object source, DataListCommandEventArgs e)
         {
@@ -166,10 +156,7 @@ namespace ExamPrototype
                 qno = e.CommandArgument.ToString().Split(',');
                 string qid = qno[0].ToString();
                 Session["QueNo"] = qid;
-
-
                 RadioButton rb = (RadioButton)e.Item.FindControl("rd_CS");
-
                 RadioButton rb1 = (RadioButton)e.Item.FindControl("rd_CS2");
                 RadioButton rb2 = (RadioButton)e.Item.FindControl("rd_CS3");
                 RadioButton rb3 = (RadioButton)e.Item.FindControl("rd_CS4");
@@ -199,7 +186,7 @@ namespace ExamPrototype
                     Button b = (Button)ite.FindControl("clr");
                     if (b.Text == Session["QueNo"].ToString())
                     {
-                        b.BackColor = System.Drawing.Color.Red;
+                        b.BackColor = System.Drawing.Color.LightGreen;
                         b.Text = Session["QueNo"].ToString();
                         // }
                     }
@@ -235,14 +222,20 @@ namespace ExamPrototype
                 });
                 thread.Start();
             }
+          
+
+            
+        }
+
+       
+
+
+        protected void EndExam_Click(object sender, EventArgs e)
+        {
+          //  ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "al()", true);
+            
         }
     }
 
-
+    
 }
-    
-
-
-    
-
-
