@@ -17,42 +17,25 @@ namespace ExamPrototype
 {
     public partial class Exam : System.Web.UI.Page
     {
-        
+
         static int currentposition = 0;
         static int totalrows = 0;
         const int questionCountForExam = 10;
         long examId = 3;
-        int studentid = 12;
-        
-        int iscompleted = 1;
         protected void lbt_Click(object sender, EventArgs e)
         {
             pvo.Style.Add("visibility", "visible");
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
-          
-            if (La.Text == "00:00:00")
-            {              
-                //This will call FinishExam
-            }
-            if (La.Text == "00:10:00")
-            {
-                //Show students to hurry up as after 10 minutes Exam will be submitted automatically
-            }
-            if (Session["CountdownTimer"] == null)
-            {
-                Session["CountdownTimer"] = new CountDownTimer(TimeSpan.Parse("0:01:59"));
-                (Session["CountdownTimer"] as CountDownTimer).Start();
-            }
+           
             if (!Page.IsPostBack)
             {
                 BindQuestionsAndAnswers();
 
                 // ExamID will come from queryString
                 // long examId = Request.QueryString["ExamID"];
-               
+
                 List<QueAnsVO> examQuestions = GetExamQuestions(examId);
 
             }
@@ -76,14 +59,14 @@ namespace ExamPrototype
 
             // This is to display buttons
 
-           
+
             QueNoPanelDataList.DataSource = queAnsVOList;
             QueNoPanelDataList.DataBind();
-          
-            
-          
+
+
+
         }
-        
+
 
         List<QueAnsVO> GetExamQuestions(long examId)
         {
@@ -141,11 +124,11 @@ namespace ExamPrototype
 
 
         }
-      
+
         void insert(string value, string qid)
         {
             Response.Write("Write");
-            
+
         }
         protected void QuestionsAndAnswersDataList_ItemCommand(object source, DataListCommandEventArgs e)
         {
@@ -192,50 +175,13 @@ namespace ExamPrototype
                     }
                 }
             }
-        }
+        } }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            if (Session["CountdownTimer"] != null)
-            {
-                La.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
-            }
-        }
-        public class CountDownTimer
-        {
-            public TimeSpan TimeLeft;
-            System.Threading.Thread thread;
-            public CountDownTimer(TimeSpan original)
-            {
-                this.TimeLeft = original;
-            }
-            public void Start()
-            {
-                // Start a background thread to count down time
-                thread = new System.Threading.Thread(() =>
-                {
-                    while (true)
-                    {
-                        System.Threading.Thread.Sleep(1000);
-                        TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));
-                    }
-                });
-                thread.Start();
-            }
-          
-
-            
-        }
-
+       
        
 
 
-        protected void EndExam_Click(object sender, EventArgs e)
-        {
-          //  ClientScript.RegisterStartupScript(this.GetType(), "randomtext", "al()", true);
-            
-        }
+       
     }
 
     
-}
