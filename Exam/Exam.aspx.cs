@@ -22,13 +22,11 @@ namespace ExamPrototype
         static int totalrows = 0;
         const int questionCountForExam = 10;
         long examId = 3;
-        protected void lbt_Click(object sender, EventArgs e)
-        {
-            pvo.Style.Add("visibility", "visible");
-        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
             if (!Page.IsPostBack)
             {
                 BindQuestionsAndAnswers();
@@ -40,7 +38,7 @@ namespace ExamPrototype
 
             }
 
-        }
+        } 
         private void BindQuestionsAndAnswers()
         {
             List<QueAnsVO> queAnsVOList = GetExamQuestions(examId);
@@ -132,6 +130,7 @@ namespace ExamPrototype
         }
         protected void QuestionsAndAnswersDataList_ItemCommand(object source, DataListCommandEventArgs e)
         {
+           
 
             if (e.CommandName == "rb")
             {
@@ -175,7 +174,9 @@ namespace ExamPrototype
                     }
                 }
             }
-        } }
+        }
+
+    }
 
        
        
