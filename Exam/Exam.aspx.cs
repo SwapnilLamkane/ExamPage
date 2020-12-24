@@ -34,7 +34,7 @@ namespace ExamPrototype
                 // ExamID will come from queryString
                 // long examId = Request.QueryString["ExamID"];
 
-                List<QueAnsVO> examQuestions = GetExamQuestions(examId);
+                //List<QueAnsVO> examQuestions = GetExamQuestions(examId);
 
             }
 

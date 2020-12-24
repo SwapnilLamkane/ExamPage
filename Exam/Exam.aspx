@@ -60,7 +60,7 @@ body.offcanvas-active{
     visibility:visible;
 }
 	
-@media all and (max-width:992px){ 
+@media all and (max-width:1249px){ 
 	
 	.offcanvas-header{ display:block; }
 
@@ -1437,10 +1437,11 @@ img.test-grid__logo.logo_responsive {
 	  }
 @media(max-width:1250px) {
           .Question-Overview {
-          margin-top:10px;
+          
 		  float:left;
-		  width:60vw;
-		  margin-left:15vw;
+		  width:100%;
+		  height:700px;
+		  margin-left:0vw;
 		  }
 
           .Side_Bar {
@@ -1454,10 +1455,13 @@ img.test-grid__logo.logo_responsive {
           visibility:visible;
 		  }
 }
-@media(max-width:992px) {
+@media(max-width:1239px) {
              .Question-Overview {
-				 margin-left:5vw;
-				 margin-top:-0PX;
+				 margin-left:-3vw;
+				margin-top:2px; 
+				 width:80vw;
+				 height:800px;
+				 overflow:hidden;
                  }
 }
 		 
@@ -1484,7 +1488,7 @@ img.test-grid__logo.logo_responsive {
 		 }
 }
 .Main_Header {
-      width:100%; height:40px; margin-top:5px;
+      width:100%; height:30px; margin-top:9px;
 	  box-shadow:2px 2px  1px;
 	 
 }
@@ -1531,9 +1535,11 @@ img.test-grid__logo.logo_responsive {
 		 margin-right:5px;
 		 visibility:hidden;
 }
-@media(max-width:979px) {
+@media(max-width:1239px) {
          .Nav_Button {
          visibility:visible;
+		 margin-right:10px;
+		 margin-top:-25px;
 		 }
              .Selection {
              margin-top:20px;
@@ -1616,7 +1622,10 @@ overflow: scroll;
 			<asp:UpdatePanel ID="pane" runat="server">
 				<ContentTemplate>
 					<header class="Main_Header">
+						&nbsp;&nbsp;&nbsp;<b>Welcome</b>&nbsp;&nbsp;&nbsp;{{Username}}
+						
 						<a style="margin-left:1vw;"><asp:Label ID="timelabel"  Text="Time Remaining:" runat="server"></asp:Label>
+							<a style="float:right; margin-right:10px;" href="" >Finish Exam</a>
 						<asp:Label ID="time"   runat="server"></asp:Label></a>
 							<div class="Nav_Button">
 								<button data-trigger="#navbar_main" class="d-lg-none btn btn-warning" type="button">☰</button>
@@ -1705,12 +1714,14 @@ overflow: scroll;
 <b class="screen-overlay"></b>
 	<div class="container">
 		<nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="offcanvas-header">  
-				<a href="#" class="btn-close" style="float:right; overflow:hidden; font-size:50px; color:red" onclick="closeSlideMenu()">&times;</a>
-			</div>
+			
 <ul class="navbar-nav">
     <asp:Panel runat="server" CssClass="Qpanel"  ID="pvo">
+		
                 <div  class="Question-Overview">
+					<div class="offcanvas-header">  
+				<a href="#" class="btn-close" style="float:right; overflow:hidden; font-size:50px; color:red; margin-right:20px;" onclick="closeSlideMenu()">&times;</a>
+			</div>
                    <b style="margin-left:30px">Question Overview:</b><br/><br/><br/>
 					<div style="margin-left:0vw">
 						<center>

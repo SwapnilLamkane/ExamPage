@@ -1,0 +1,20 @@
+Issues
+1.Timer issue:once next button is clicked timer will invisible.
+2.on mobile view we cant see question overview instructions.
+
+Features
+1.Maintain the question status
+1.1 if user click next the quetion overview will fill with color Red with status Not Attempted.
+1.2 if user selects the answer and click next then quetion number will filled with green color(attempted).
+1.3 if user click on review for latter button without solving answer then filled with purple color(Tobe reviewed). 
+1.4 By default which questions we are not visited it will be gray(not  viewed yet).
+1.5 if user click on review for latter button with solving answer then filled with purple with tick color(Attempted and marked for review)
+2. Clear Selction should lear the student selcted answer
+
+Code Review
+1.In our aspx we written style related code. just remove that and create saperate css file.
+2.Rename/give proper names to css & js files
+3. Saving the answer in DB should happen on Save/Next/Prev button click. Remove the old implementation.
+ 
+
+Next date : 15 Jan 2021
