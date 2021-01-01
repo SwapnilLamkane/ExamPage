@@ -8,7 +8,6 @@ namespace ExamPrototype
 {
     public static class MockQuestions
     {
-        
         /// <summary>
         /// Get mock questions in multiples of 5 i.e. 5,10,20, 50 etc
         /// </summary>

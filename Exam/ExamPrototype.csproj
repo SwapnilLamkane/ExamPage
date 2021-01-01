@@ -67,7 +67,7 @@
     <Content Include="App_Data\ExamDB_log.ldf">
       <DependentUpon>ExamDB.mdf</DependentUpon>
     </Content>
-    <Content Include="css.css" />
+    <Content Include="ExamStyle.css" />
     <Content Include="Exam.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -78,7 +78,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="script.js" />
+    <Content Include="ExamScript.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

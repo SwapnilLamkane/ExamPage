@@ -21,12 +21,18 @@ namespace ExamPrototype
         static int currentposition = 0;
         static int totalrows = 0;
         const int questionCountForExam = 10;
-        long examId = 3;
+        Int64   examId = 3;
+        char Answered = '1';
+        int Result = 1;
+        Int64 ExamId = 30;
+
+
+
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+         
             if (!Page.IsPostBack)
             {
                 BindQuestionsAndAnswers();
@@ -38,7 +44,7 @@ namespace ExamPrototype
 
             }
 
-        } 
+        }
         private void BindQuestionsAndAnswers()
         {
             List<QueAnsVO> queAnsVOList = GetExamQuestions(examId);
@@ -125,12 +131,24 @@ namespace ExamPrototype
 
         void insert(string value, string qid)
         {
-            Response.Write("Write");
-
+        
+                SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString);
+                cn.Open();
+                SqlCommand cm = new SqlCommand("insert into ExamResult(ExamAttemptID,ExamQueID,StudentAns,Result,TimeTaken,DateSolved,StudentAnswerStatus)values(@ExamAttemptID,@ExamQueID,@StudentAns,@Result,@TimeTaken,@DateSolved,@StudentAnswerStatus)", cn);
+                cm.Parameters.AddWithValue("@ExamAttemptID", ExamId);
+                cm.Parameters.AddWithValue("@ExamQueID", Int64.Parse(qid));
+                cm.Parameters.AddWithValue("@StudentAns", value.ToString());
+                cm.Parameters.AddWithValue("@Result", Result);
+                cm.Parameters.AddWithValue("@TimeTaken", time.Text);
+                cm.Parameters.AddWithValue("@DateSolved", DateTime.Now);
+                cm.Parameters.AddWithValue("@StudentAnswerStatus", Answered.ToString());
+                cm.ExecuteNonQuery();
+                return ;
         }
+        string x = "1";
         protected void QuestionsAndAnswersDataList_ItemCommand(object source, DataListCommandEventArgs e)
         {
-           
+
 
             if (e.CommandName == "rb")
             {
@@ -158,31 +176,71 @@ namespace ExamPrototype
                 {
                     insert(rb3.Text, qid.ToString());
                 }
+                else { }
                 //}
+                
 
-                foreach (DataListItem ite in QueNoPanelDataList.Items)
-                {
+                    foreach (DataListItem ite in QueNoPanelDataList.Items)
+                    {
                     //if (Session["QueNo"].ToString().Length > 0)
                     // {
+                   /*     string CS = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+                        SqlConnection con = new SqlConnection(CS);
+                        con.Open();
+                        SqlCommand cmd = new SqlCommand("SELECT * FROM ExamResult", con);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+
+                        pname.Text = ds.Tables[0].Rows[0]["ExamQueID"].ToString();
+                    
+                    */
 
                     Button b = (Button)ite.FindControl("clr");
-                    if (b.Text == Session["QueNo"].ToString())
-                    {
-                        b.BackColor = System.Drawing.Color.LightGreen;
-                        b.Text = Session["QueNo"].ToString();
-                        // }
+                        if (b.Text == pname.Text)
+                        {
+                            b.ForeColor = System.Drawing.Color.Red;
+                            b.Text = "??";
+                            b.EnableViewState = true;
+                         }
                     }
+                
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            foreach (DataListItem ite in QuestionsAndAnswersDataList.Items)
+            {
+                RadioButton rb = (RadioButton)ite.FindControl("rd_CS");
+                RadioButton rb1 = (RadioButton)ite.FindControl("rd_CS2");
+                RadioButton rb2 = (RadioButton)ite.FindControl("rd_CS3");
+                RadioButton rb3 = (RadioButton)ite.FindControl("rd_CS4");
+                if (rb.Checked == true)
+                {
+                    rb.Checked = false;
+                }
+                if (rb1.Checked == true)
+                {
+                    rb1.Checked = false;
+                }
+                if (rb2.Checked == true)
+                {
+                    rb2.Checked = false;
+                }
+                if (rb3.Checked == true)
+                {
+                    rb3.Checked = false;
                 }
             }
         }
 
+
+
+
+
+
     }
-
-       
-       
-
-
-       
-    }
+}
 
     
