@@ -36,7 +36,7 @@ namespace ExamPrototype
             if (!Page.IsPostBack)
             {
                 BindQuestionsAndAnswers();
-
+                
                 // ExamID will come from queryString
                 // long examId = Request.QueryString["ExamID"];
 
@@ -184,27 +184,61 @@ namespace ExamPrototype
                     {
                     //if (Session["QueNo"].ToString().Length > 0)
                     // {
-                   /*     string CS = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-                        SqlConnection con = new SqlConnection(CS);
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand("SELECT * FROM ExamResult", con);
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataSet ds = new DataSet();
-                        da.Fill(ds);
+                    /*     string CS = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+                         SqlConnection con = new SqlConnection(CS);
+                         con.Open();
+                         SqlCommand cmd = new SqlCommand("SELECT * FROM ExamResult", con);
+                         SqlDataAdapter da = new SqlDataAdapter(cmd);
+                         DataSet ds = new DataSet();
+                         da.Fill(ds);
 
-                        pname.Text = ds.Tables[0].Rows[0]["ExamQueID"].ToString();
-                    
-                    */
+                         pname.Text = ds.Tables[0].Rows[0]["ExamQueID"].ToString();
 
+                     */
+                    pname.Text = Session["QueNo"].ToString();
                     Button b = (Button)ite.FindControl("clr");
                         if (b.Text == pname.Text)
                         {
-                            b.ForeColor = System.Drawing.Color.Red;
-                            b.Text = "??";
-                            b.EnableViewState = true;
+                            b.BackColor = System.Drawing.Color.Red;
+                            b.Text = "????";
+                       
+                        continue;
+
                          }
                     }
                 
+            }
+
+            if (e.CommandName == "rb1")
+            {
+                string[] qno = new string[1];
+                qno = e.CommandArgument.ToString().Split(',');
+                string qid = qno[0].ToString();
+                Session["QueNo"] = qid;
+                foreach (DataListItem ite in QueNoPanelDataList.Items)
+                {
+                    //if (Session["QueNo"].ToString().Length > 0)
+                    // {
+                    /*     string CS = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+                         SqlConnection con = new SqlConnection(CS);
+                         con.Open();
+                         SqlCommand cmd = new SqlCommand("SELECT * FROM ExamResult", con);
+                         SqlDataAdapter da = new SqlDataAdapter(cmd);
+                         DataSet ds = new DataSet();
+                         da.Fill(ds);
+
+                         pname.Text = ds.Tables[0].Rows[0]["ExamQueID"].ToString();
+
+                     */
+                    pname.Text = Session["QueNo"].ToString();
+                    Button b = (Button)ite.FindControl("clr");
+                    if (b.Text == pname.Text)
+                    {
+                        b.BackColor = System.Drawing.Color.Red;
+                     }
+
+                }
+
             }
         }
 

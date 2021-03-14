@@ -909,7 +909,6 @@ sup {
     display: block !important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -919,7 +918,6 @@ sup {
     transition: none;
     -webkit-transition: none;
     -moz-transition: none;
-    -ms-transition: none;
     -o-transition: none;
 }
 
@@ -1341,7 +1339,6 @@ test-sections {
 
 .test-sections__subject-label {
     font-size: 13px;
-    min-width: auto;
 }
 
 .test-sections__subject:hover .test-sections__subject-label, .test-sections__subject.test-sections__subject--active .test-sections__subject-label {
@@ -1524,6 +1521,7 @@ img.test-grid__logo.logo_responsive {
     border-radius: 20px;
     border: none;
     margin-top:-50px;
+
 }
 
 .topnav {

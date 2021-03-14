@@ -8,14 +8,53 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="ExamStyle.css"/>
 <script src="ExamScript.js" type="text/javascript"></script>  
+	<script>
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10)
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + " " + " " + seconds;
+                if (--timer < 0) {
+                    timer = duration;
+                    swal.fire({
+                        position: 'center',
+                        title: 'End Time',
+                        showConfirmButton: false,
+                        timer: 1000000
+                    })
+                    window.location.href = "a.aspx";
+                }
+                console.log(parseInt(seconds))
+                window.localStorage.setItem("seconds", seconds)
+                window.localStorage.setItem("minutes", minutes)
+            }, 1000);
+        }
+        window.onload = function () {
+            sec = parseInt(window.localStorage.getItem("seconds"))
+            min = parseInt(window.localStorage.getItem("minutes"))
+            if (parseInt(min * sec)) {
+                var time = (parseInt(min * 60) + sec);
+            }
+            else {
+                var time = 60 * 60;
+            }
+            display = document.querySelector('#time');
+            startTimer(time, display);
+        }
+    </script>
 </head>
 <body class="ng-scope" >
+	
 	<form id="form1" runat="server">
 		<div class="header">
 			<a href="#default" class="logo">Welcome {{Username}}</a>
 				 <div class="header-right">
 				   <a class="active" href="#home"><asp:Label ID="timelabel"   Text="Time Remaining:" runat="server"></asp:Label>
-						<asp:Label ID="time"   runat="server"></asp:Label></a>
+						<asp:Label ID="time" runat="server"></asp:Label></a>
     						<div class="Nav_Button">
 								<button data-trigger="#navbar_main" type="button">☰</button>
 							</div>
@@ -60,22 +99,22 @@
 													</p><br></br>
 														<a class="phoenix-question__choice single_choice ng-scope" >
 															<a class="Options">
-																<asp:RadioButton ID="rd_CS"  Width="600px" Height="20px" style="border-radius:10px;"  GroupName="1" runat="server" Text='<%# Eval("AnsA") %>' />
+																<asp:RadioButton ID="rd_CS"  EnableViewState="true" Width="600px" Height="20px" style="border-radius:10px;"  GroupName="1" runat="server" Text='<%# Eval("AnsA") %>' />
 															</a>
 														</a><br></br><br></br>
 															<a class="phoenix-question__choice single_choice ng-scope" >
 																<a class="Options">
-                                                        			<asp:RadioButton ID="rd_CS2"  Width="600px" Height="20px" style="border-radius:10px; "  GroupName="1" runat="server" Text='<%# Eval("AnsB") %>' />
+                                                        			<asp:RadioButton ID="rd_CS2" EnableViewState="true"  Width="600px" Height="20px" style="border-radius:10px; "  GroupName="1" runat="server" Text='<%# Eval("AnsB") %>' />
 																</a>
 														</a><br></br><br></br>
 															<a class="phoenix-question__choice single_choice ng-scope" >
 																<a class="Options">
-                                                        			<asp:RadioButton ID="rd_CS3"  Width="600px" Height="2" style="border-radius:10px;"  GroupName="1" runat="server" Text='<%# Eval("AnsC") %>' />
+                                                        			<asp:RadioButton ID="rd_CS3" EnableViewState="true"  Width="600px" Height="2" style="border-radius:10px;"  GroupName="1" runat="server" Text='<%# Eval("AnsC") %>' />
 																</a>
 													</a><br></br></br></br>
                                                     <a class="phoenix-question__choice single_choice ng-scope" >
 															<a class="Options">
-                                                       			<asp:RadioButton ID="rd_CS4"  Width="600px" Height="20px" style="border-radius:10px;"  GroupName="1" runat="server" Text='<%# Eval("AnsD") %>' />
+                                                       			<asp:RadioButton ID="rd_CS4" EnableViewState="true"  Width="600px" Height="20px" style="border-radius:10px;"  GroupName="1" runat="server" Text='<%# Eval("AnsD") %>' />
 															</a>
 													</a><br></br><br></br>
                                                 </ul>
@@ -127,7 +166,7 @@
 										<div class="O_B">
 											<asp:DataList runat="server" ID="QueNoPanelDataList" DataKeyField="QueNo" RepeatDirection="Horizontal" RepeatColumns="4"     >  <%-- DataSourceID="SqlDataSource1"--%>
 												<ItemTemplate>
-												  <b > <asp:Button runat="server" ID="clr" CommandName="cn"  CssClass="OButtons"  style="width:40px; height:35px; border-radius:35px; background-color:gainsboro" Text='<%#Eval("QueNo") %>'></asp:Button>
+												  <b > <asp:Button runat="server" ID="clr" CommandName="cn"  CssClass="OButtons"  style="width:40px; height:35px; border-radius:35px; " Text='<%#Eval("QueNo") %>'></asp:Button>
 												</b>
 												</ItemTemplate>
 											</asp:DataList>
