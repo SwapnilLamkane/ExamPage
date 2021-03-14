@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-	<title> Exam</title>
+	<title>Exam</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="ExamStyle.css"/>
